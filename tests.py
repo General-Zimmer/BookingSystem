@@ -1,3 +1,10 @@
 import datetime
+import mysql.connector
+import database
 
-print(mydb)
+
+
+con = database.connect
+
+con.add(con.getConnect(con), "work", "die")
+con.confirm()
