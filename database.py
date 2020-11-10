@@ -1,7 +1,7 @@
 import mysql.connector
 
 
-class connect:
+class database:
     def __init__(self):
         self.mysql = mysql.connector.connect(host="148.251.68.245", user="skole", database="skole")
         self.curs = self.mysql.cursor()
@@ -29,3 +29,6 @@ class connect:
 
     def close(self):
         self.mysql.close()
+
+    def connect(self):
+        self.mysql.connect()
