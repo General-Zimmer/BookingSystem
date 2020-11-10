@@ -1,7 +1,17 @@
 import database
 import unittest
+import main
 
 
+class LogicTests(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def test_main(self):
+        pass
+
+    def tearDown(self):
+        pass
 
 
 class DatabaseTests(unittest.TestCase):
@@ -13,8 +23,6 @@ class DatabaseTests(unittest.TestCase):
         self.sql.modify("Yes", "no")
         self.sql.delete("no")
         self.sql.confirm()
-
-
 
     def tearDown(self):
         self.sql.close()
