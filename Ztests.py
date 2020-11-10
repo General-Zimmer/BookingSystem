@@ -3,11 +3,11 @@ import mysql.connector
 import database
 
 
-class test():
+class test:
     def add_something(self):
-        sql = database.connect
+        sql = database.connect()
 
-        sql.add(self, "yeet")
+        sql.add("weee", "yeet")
 
 
-test.add_something("yes", "yeet")
+test().add_something()
