@@ -1,6 +1,6 @@
 import database
 import unittest
-import main
+
 
 
 class LogicTests(unittest.TestCase):

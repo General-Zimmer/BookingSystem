@@ -9,23 +9,30 @@ class database:
         self.curs.execute("SHOW TABLES")
         tables = self.curs.fetchall()
         if ('customers',) not in tables:
-            self.curs.execute("CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255))")
+            self.curs.execute(
+                "CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255))")
 
-    def add(self, navn, dato):
+    def __do(self, cmd: str, val: tuple = None):
+        if val is None:
+            self.curs.execute(cmd)
+        else:
+            self.curs.execute(cmd, val)
+        self.mysql.commit()
+
+    def add(self, navn: str, dato: str):
         add = "INSERT INTO customers (name, address) VALUES (%s, %s)"
         val = (navn, dato)
-        self.curs.execute(add, val)
-        self.mysql.commit()
+        self.__do(add, val)
 
-    def delete(self, name):
+
+    def delete(self, name: str):
         delete = "DELETE FROM customers WHERE name = '{0}'"
-        self.curs.execute(delete.format(name))
-        self.mysql.commit()
+        self.__do(delete.format(name))
 
-    def modify(self, oldName, newName):
+
+    def modify(self, oldName: str, newName: str):
         modify = "UPDATE customers SET name = '{newName}' WHERE name = '{oldName}'"
-        self.curs.execute(modify.format(oldName=oldName, newName=newName))
-        self.mysql.commit()
+        self.__do(modify.format(oldName=oldName, newName=newName))
 
     def close(self):
         self.mysql.close()
