@@ -12,7 +12,7 @@ class database:
             self.curs.execute(
                 "CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), dato VARCHAR(255))")
 
-    def __do(self, cmd: str, val: tuple = None):
+    def _do(self, cmd: str, val: tuple = None):
         if val is None:
             self.curs.execute(cmd)
         else:
@@ -22,15 +22,15 @@ class database:
     def add(self, navn: str, dato: str):
         add = "INSERT INTO customers (name, dato) VALUES (%s, %s)"
         val = (navn, dato)
-        self.__do(add, val)
+        self._do(add, val)
 
     def delete(self, ting: str, place: str = "name"):
         delete = "DELETE FROM customers WHERE {place} = '{ting}'"
-        self.__do(delete.format(ting=ting, place=place))
+        self._do(delete.format(ting=ting, place=place))
 
     def modify(self, old: str, new: str, place: str = "name"):
         modify = "UPDATE customers SET {place} = '{newName}' WHERE {place} = '{oldName}'"
-        self.__do(modify.format(oldName=old, newName=new, place=place))
+        self._do(modify.format(oldName=old, newName=new, place=place))
 
     def close(self):
         self.mysql.close()
