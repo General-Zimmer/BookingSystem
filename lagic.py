@@ -16,6 +16,12 @@ class reservation():
         finaldate = datetime.datetime(year, month, day, hour, minute)
         return finaldate
 
+    def datetest(self, month, day):
+        if month < 13 and day < 32 and len(strmonth) < 3 and len(strday) < 3 and len(stryear) < 5:
+            return True
+        else:
+            return False
+
 def is_string_with_space(check_input):
     valid = False
     if ' ' in check_input:

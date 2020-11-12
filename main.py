@@ -1,6 +1,8 @@
 import datetime
-import lagic as res
+import lagic
 
+res = lagic.reservation
+isstring = lagic.is_string_with_space
 
 print(datetime.datetime.now())
 
@@ -8,9 +10,9 @@ navnset = False
 while navnset == False:
     print("Skriv navn")
     navn = str(input())
-    print(is_string_with_space(navn))
-    if is_string_with_space(navn) == True:
-        res = reservation(navn)
+    print(isstring(navn))
+    if isstring(navn) == True:
+        res = res(navn)
         navnset = True
 
 datoset = False
@@ -22,20 +24,9 @@ while datoset == False:
         stryear = str(year)
         strmonth = str(month)
         strday = str(day)
+        datoset = res.datetest(month, day)
     except:
-        print("Du skrev noget jank")
-
-    try:
-        if month < 13 and day < 32 and len(strmonth) < 3 and len(strday) < 3 and len(stryear) < 5:
-            datoset = True
-            print("Det lykkedes")
-        else:
-            print("Error in your date, remember to write it like YYYY-MM-DD")
-    except:
-        print("Din far")
-
-
-
+        pass
 
 print("Enter a time in HH:MM format")
 time = input()
