@@ -16,7 +16,7 @@ class reservation():
         finaldate = datetime.datetime(year, month, day, hour, minute)
         return finaldate
 
-    def datetest(self, month, day):
+    def datetest(self, month, day, strmonth, strday, stryear):
         if month < 13 and day < 32 and len(strmonth) < 3 and len(strday) < 3 and len(stryear) < 5:
             return True
         else:

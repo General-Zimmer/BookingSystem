@@ -24,7 +24,7 @@ while datoset == False:
         stryear = str(year)
         strmonth = str(month)
         strday = str(day)
-        datoset = res.datetest(month, day)
+        datoset = res.datetest(month, day, strmonth, strday, stryear)
     except:
         pass
 
