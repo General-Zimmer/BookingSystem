@@ -28,8 +28,18 @@ while datoset == False:
     except:
         pass
 
-print("Enter a time in HH:MM format")
-time = input()
-hour, minute = res.time(time)
+
+
+timeset = False
+while timeset == False:
+    print("Enter a time in HH:MM format")
+    time = input()
+    try:
+        hour, minute = res.time(time)
+        strmin = str(minute)
+        strhour = str(hour)
+        timeset = res.timetest(hour, minute, strhour, strmin)
+    except:
+        pass
 
 print("Reservation for", navn, "til", res.final(year, month, day, hour, minute))

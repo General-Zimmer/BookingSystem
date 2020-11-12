@@ -22,6 +22,12 @@ class reservation():
         else:
             return False
 
+    def timetest(self, hour, minute, strhour, strmin):
+        if hour < 24 and minute < 61 and len(strhour) < 3 and len(strmin) < 3:
+            return True
+        else:
+            return False
+
 def is_string_with_space(check_input):
     valid = False
     if ' ' in check_input:
