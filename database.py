@@ -32,6 +32,12 @@ class database:
         modify = "UPDATE customers SET {place} = '{newName}' WHERE {place} = '{oldName}'"
         self._do(modify.format(oldName=old, newName=new, place=place))
 
+    def pull(self, hvad: str, ting: str = "name"):
+        pull = "SELECT * FROM customers"
+        self._do(pull)
+
+
+
     def close(self):
         self.mysql.close()
 
