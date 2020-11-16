@@ -6,6 +6,11 @@ class database:
         self.mysql = mysql.connector.connect(host="148.251.68.245", user="skole", database="skole")
         self.curs = self.mysql.cursor()
 
+        self.dict = {
+            "name": 0,
+            "dato": 1
+        }
+
         self.curs.execute("SHOW TABLES")
         tables = self.curs.fetchall()
         if ('customers',) not in tables:
@@ -30,25 +35,22 @@ class database:
         delete = "DELETE FROM customers WHERE {place} = '{ting}'"
         self._do(delete.format(ting=ting, place=place))
 
-    def modify(self, old: str, new: str, place: str = "name"):
-        modify = "UPDATE customers SET {place} = '{newName}' WHERE {place} = '{oldName}'"
-        self._do(modify.format(oldName=old, newName=new, place=place))
-
     def pull(self, hvad: str, ting: str = "name"):
         pull = "SELECT * FROM customers"
         self._do(pull.format(name=ting), {"nocom": "yeet"})
         row = self.curs.fetchone()
-        dict = {
-            "name": 0,
-            "dato": 1
-        }
-        print(dict.get(ting))
 
         while row is not None:
-            if row[dict.get(ting)] == hvad:
+            if row[self.dict.get(ting)] == hvad:
                 return row
             else:
                 row = self.curs.fetchone()
+
+    def modify(self, search: str, replace: str, whatchange: str = "dato", whatsearch: str = "name"):
+        result = self.pull(search, whatsearch)
+        result[self.dict.get(whatchange)]
+
+
 
     def close(self):
         self.mysql.close()

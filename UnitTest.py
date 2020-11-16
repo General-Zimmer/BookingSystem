@@ -18,6 +18,7 @@ class DatabaseTests(unittest.TestCase):
     def setUp(self):
         self.sql = database.database()
 
+
     def test_add(self):
         self.sql.add("Yes", "test")
 
