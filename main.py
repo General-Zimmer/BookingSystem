@@ -8,6 +8,7 @@ sql = database.database()
 
 print(datetime.datetime.now())
 def data():
+    global res, isstring, sql
     navnset = False
     while navnset == False:
         print("Skriv navn")
@@ -20,9 +21,9 @@ def data():
     datoset = False
     while datoset == False:
         print("Enter a date in YYYY-MM-DD format")
-        dato = input()
+        datoin = input()
         try:
-            year, month, day, = res.dato(dato)
+            year, month, day, = res.dato(datoin)
             stryear = str(year)
             strmonth = str(month)
             strday = str(day)
@@ -42,6 +43,29 @@ def data():
         except:
             pass
     finaldate = str(res.final(year, month, day, hour, minute))
+    sql.add(str(navn), str(finaldate))
+    print("Reservation for", navn, "til", finaldate)
 
+print("Hvad vil du? "
+      "1: Tilføj"
+      "2: Ændrer"
+      "3: Slet")
+valg = int(input())
+
+if valg == 1:
+    data()
+
+elif valg == 2:
+    print("Hvem skal ændres?")
+    valgnavn = input()
+
+    print("Hvad vil du ændrer?")
+    valgendr = input()
+
+    sql.modify(valgnavn, valgendr)
+elif valg == 3:
+    print("Hvem skal slettes?")
+    valgnavn = input()
+    sql.delete(valgnavn)
 
 
