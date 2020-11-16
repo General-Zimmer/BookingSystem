@@ -1,8 +1,10 @@
 import datetime
-import lagic
+import lagic as la
+import database
 
-res = lagic.reservation
-isstring = lagic.is_string_with_space
+res = la.reservation
+isstring = la.is_string_with_space
+sql = database.database()
 
 print(datetime.datetime.now())
 
@@ -28,8 +30,6 @@ while datoset == False:
     except:
         pass
 
-
-
 timeset = False
 while timeset == False:
     print("Enter a time in HH:MM format")
@@ -42,4 +42,8 @@ while timeset == False:
     except:
         pass
 
-print("Reservation for", navn, "til", res.final(year, month, day, hour, minute))
+finaldate = str(res.final(year, month, day, hour, minute))
+
+sql.add(str(navn), str(finaldate))
+
+print("Reservation for", navn, "til", finaldate)
