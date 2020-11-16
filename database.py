@@ -45,8 +45,8 @@ class database:
         }
         print(dict.get(ting))
 
-        while row[dict.get(ting)] is not None:
-            if row == hvad:
+        while row is not None:
+            if row[dict.get(ting)] == hvad:
                 return row
             else:
                 row = self.curs.fetchone()

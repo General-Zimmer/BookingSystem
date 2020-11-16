@@ -25,7 +25,6 @@ class DatabaseTests(unittest.TestCase):
         self.sql.delete("no")
 
     def test_pull(self):
-        self.sql.add("testing da test test", "yeet")
         row = self.sql.pull("testing da test test")
         print(row)
 
