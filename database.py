@@ -35,6 +35,8 @@ class database:
     def pull(self, hvad: str, ting: str = "name"):
         pull = "SELECT * FROM customers"
         self._do(pull)
+        rows = self.curs.fetchone()
+
 
 
 
