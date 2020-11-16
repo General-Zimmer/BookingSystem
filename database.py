@@ -17,7 +17,9 @@ class database:
             self.curs.execute(cmd)
         else:
             self.curs.execute(cmd, val)
-        self.mysql.commit()
+
+        if val != {"nocom": "yeet"}:
+            self.mysql.commit()
 
     def add(self, navn: str, dato: str):
         add = "INSERT INTO customers (name, dato) VALUES (%s, %s)"
@@ -34,11 +36,20 @@ class database:
 
     def pull(self, hvad: str, ting: str = "name"):
         pull = "SELECT * FROM customers"
-        self._do(pull)
-        rows = self.curs.fetchone()
+        self._do(pull.format(name=ting), {"nocom": "yeet"})
+        row = self.curs.fetchone()
+        dict = {
+            "id": 0,
+            "name": 1,
+            "dato": 2
+        }
+        print(dict.get(ting))
 
-
-
+        while row[dict.get(ting)] is not None:
+            if row == hvad:
+                return row
+            else:
+                row = self.curs.fetchone()
 
     def close(self):
         self.mysql.close()
