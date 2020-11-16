@@ -10,7 +10,7 @@ class database:
         tables = self.curs.fetchall()
         if ('customers',) not in tables:
             self.curs.execute(
-                "CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), dato VARCHAR(255))")
+                "CREATE TABLE customers (name VARCHAR(255), dato VARCHAR(255))")
 
     def _do(self, cmd: str, val: tuple = None):
         if val is None:
@@ -39,9 +39,8 @@ class database:
         self._do(pull.format(name=ting), {"nocom": "yeet"})
         row = self.curs.fetchone()
         dict = {
-            "id": 0,
-            "name": 1,
-            "dato": 2
+            "name": 0,
+            "dato": 1
         }
         print(dict.get(ting))
 
