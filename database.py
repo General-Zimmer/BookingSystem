@@ -48,9 +48,9 @@ class database:
 
     def modify(self, search: str, replace: str, whatchange: str = "dato", whatsearch: str = "name"):
         result = self.pull(search, whatsearch)
-        result[self.dict.get(whatchange)]
-
-
+        yeet = result[self.dict.get(whatchange)]
+        modify = "UPDATE customers SET {change} = '{replace}' WHERE {change} = '{replace}'"
+        self.curs.execute(modify.format(change=yeet), replace=replace)
 
     def close(self):
         self.mysql.close()

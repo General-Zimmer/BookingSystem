@@ -23,7 +23,7 @@ class DatabaseTests(unittest.TestCase):
         self.sql.add("Yes", "test")
 
         self.sql.modify("Yes", "no")
-        self.sql.delete("no")
+
 
     def test_pull(self):
         self.sql.add("testing da test test", "yeet")
