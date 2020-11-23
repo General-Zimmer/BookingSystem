@@ -4,7 +4,7 @@ import mysql.connector
 class database:
     def __init__(self):
         self.mysql = mysql.connector.connect(host="148.251.68.245", user="skole", database="skole")
-        self.curs = self.mysql.cursor()
+        self.curs = self.mysql.cursor(buffered=True)
 
         self.dict = {
             "name": 0,
@@ -48,9 +48,12 @@ class database:
 
     def modify(self, search: str, replace: str, whatchange: str = "dato", whatsearch: str = "name"):
         result = self.pull(search, whatsearch)
-        yeet = result[self.dict.get(whatchange)]
-        modify = "UPDATE customers SET {change} = '{replace}' WHERE {change} = '{replace}'"
-        self.curs.execute(modify.format(change=yeet), replace=replace)
+        print(self.dict.get(whatchange))
+        print(result)
+        print(result[1])
+        yeet = "" + result[self.dict.get(whatchange)]
+        modify = "UPDATE customers SET {change} = '{replace}' WHERE {change} = '{ree}'"
+        self._do(modify.format(change=whatchange, replace=replace, ree=yeet))
 
     def close(self):
         self.mysql.close()

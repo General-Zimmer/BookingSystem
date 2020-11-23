@@ -34,7 +34,8 @@ class DatabaseTests(unittest.TestCase):
     def test_modify(self):
 
         self.sql.add("yeeta", "test")
-        self.sql.modify()
+
+        self.sql.modify("yeeta", "efgea")
 
 
     def tearDown(self):
