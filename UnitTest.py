@@ -31,6 +31,11 @@ class DatabaseTests(unittest.TestCase):
         self.assertEqual(row[2], "yeet")
         self.sql.delete("testing da test test")
 
+    def test_modify(self):
+
+        self.sql.add("yeeta", "test")
+        self.sql.modify()
+
 
     def tearDown(self):
         self.sql.close()
