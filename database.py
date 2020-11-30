@@ -48,9 +48,6 @@ class database:
 
     def modify(self, search: str, replace: str, whatchange: str = "dato", whatsearch: str = "name"):
         result = self.pull(search, whatsearch)
-        print(self.dict.get(whatchange))
-        print(result)
-        print(result[1])
         yeet = "" + result[self.dict.get(whatchange)]
         modify = "UPDATE customers SET {change} = '{replace}' WHERE {change} = '{ree}'"
         self._do(modify.format(change=whatchange, replace=replace, ree=yeet))
