@@ -1,14 +1,15 @@
 import database
+import lagic as lo
 import unittest
 
 
 
 class LogicTests(unittest.TestCase):
     def setUp(self):
-        pass
+        self.res = lo.reservation("General Zimmer")
 
-    def test_main(self):
-        pass
+    def test_dato(self):
+        self.assertEqual(self.res.dato("2000-12-20"), (2000, 12, 20))
 
     def tearDown(self):
         pass
