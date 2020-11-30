@@ -7,8 +7,8 @@ isstring = la.is_string_with_space
 sql = database.database()
 
 print(datetime.datetime.now())
-def data():
-    global res, isstring, sql
+def navndef():
+    global res, isstring
     navnset = False
     while navnset == False:
         print("Skriv navn")
@@ -17,7 +17,9 @@ def data():
         if isstring(navn) == True:
             res = res(navn)
             navnset = True
-
+    return navn
+def datedef():
+    global res, sql
     datoset = False
     while datoset == False:
         print("Enter a date in YYYY-MM-DD format")
@@ -35,16 +37,17 @@ def data():
     while timeset == False:
         print("Enter a time in HH:MM format")
         time = input()
-        try:
-            hour, minute = res.time(time)
-            strmin = str(minute)
-            strhour = str(hour)
-            timeset = res.timetest(hour, minute, strhour, strmin)
-        except:
-            pass
+        #try:
+        hour, minute = res.time(time)
+        strmin = str(minute)
+        strhour = str(hour)
+        timeset = res.timetest(hour, minute, strhour, strmin)
+        print(timeset)
+        #except:
+            #pass
     finaldate = str(res.final(year, month, day, hour, minute))
-    sql.add(str(navn), str(finaldate))
-    print("Reservation for", navn, "til", finaldate)
+    return finaldate
+
 
 print("Hvad vil du? "
       "1: Tilføj"
@@ -53,16 +56,19 @@ print("Hvad vil du? "
 valg = int(input())
 
 if valg == 1:
-    data()
+    navn = navndef()
+    finaldate = datedef()
+    print("Reservation for", navn, "til", finaldate)
+    sql.add(navn, finaldate)
 
 elif valg == 2:
-    print("Hvem skal ændres?")
-    valgnavn = input()
+    navn = str(navndef())
+    newdate = str(datedef())
+    print("New date is:", newdate, type(newdate))
+    print(navn)
+    print(navn, newdate)
+    sql.modify(navn, newdate)
 
-    print("Hvad vil du ændrer?")
-    valgendr = input()
-
-    sql.modify(valgnavn, valgendr)
 elif valg == 3:
     print("Hvem skal slettes?")
     valgnavn = input()
