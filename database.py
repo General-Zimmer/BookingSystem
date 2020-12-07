@@ -45,6 +45,11 @@ class database:
                 return row
             else:
                 row = self.curs.fetchone()
+    def pullall(self):
+        pull = "SELECT * FROM customers"
+        self._do(pull)
+        all = self.curs.fetchall()
+        return all
 
     def modify(self, search: str, replace: str, whatchange: str = "dato", whatsearch: str = "name"):
         result = self.pull(search, whatsearch)
