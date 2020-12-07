@@ -27,6 +27,7 @@ class database:
 
         if val != {"nocom": "yeet"}:
             self.mysql.commit()
+
         #Tilføjer en række til tabellen med navn og dato
     def add(self, navn: str, dato: str):
         add = "INSERT INTO customers (name, dato) VALUES (%s, %s)"
