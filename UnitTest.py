@@ -10,10 +10,10 @@ class LogicTests(unittest.TestCase):
         self.res = lo.reservation("General Zimmer")
 
     def test_dato(self):
-        self.dat = self.assertEqual(self.res.dato("2000-12-20"), (2000, 12, 20))
+        self.assertEqual(self.res.dato("2000-12-20"), (2000, 12, 20))
 
     def test_time(self):
-        self.tim = self.assertEqual(self.res.time("12:45"), (12, 45))
+        self.assertEqual(self.res.time("12:45"), (12, 45))
 
     def test_final(self):
         self.assertEqual(self.res.final(2000, 12, 20, 12, 45), datetime.datetime(2000, 12, 20, 12, 45))
