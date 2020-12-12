@@ -4,6 +4,16 @@ class reservation():
     def __init__(self, navn):
         self.navn = navn
 
+    def is_string_with_space(self):
+        valid = False
+        if ' ' in self.navn:
+            for char in self.navn:
+                if char.isdigit():
+                    valid = False
+                elif char.isalpha() or char.isspace():
+                    valid = True
+        return valid
+
     def dato(self, dato):
         year, month, day = map(int, dato.split('-'))
         return year, month, day
@@ -28,12 +38,4 @@ class reservation():
         else:
             return False
 
-def is_string_with_space(check_input):
-    valid = False
-    if ' ' in check_input:
-        for char in check_input:
-            if char.isdigit():
-                valid = False
-            elif char.isalpha() or char.isspace():
-                valid = True
-    return valid
+
