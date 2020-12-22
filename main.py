@@ -61,10 +61,12 @@ def datedef():
 
 
 def search(startdate, starttime, slutdate, sluttime):
-    startyear, startmonth, startday = startdate.split("-")
-    starthour, startmin = starttime.split(":")
-    slutyear, slutmonth, slutday = slutdate.split("-")
-    sluthour, slutmin = sluttime.split(":")
+    newstartdate = startdate.replace("-", "")
+    newstarttime = starttime.replace(":", "")
+    start = newstartdate+newstarttime
+    newslutdate = slutdate.replace("-", "")
+    newsluttime = sluttime.replace(":", "")
+    slut = newslutdate+newsluttime
 
     reslist = sql.pullall()
     intervallist = []
@@ -74,30 +76,23 @@ def search(startdate, starttime, slutdate, sluttime):
         resname, resfulldate = res.split(",")
         blank, resdate, restime = resfulldate.split(" ")
         resdate = resdate.replace("'", " ")
+        newresdate = resdate.replace("-", "")
+
         restime = restime.replace(")", " ")
         restime = restime.replace("'", " ")
-        # print("før", res)
-        resyear, resmonth, resday = resdate.split("-")
-        reshour, resmin, ressec = restime.split(":")
-        # print("testyear", 0 <= int(slutyear)-int(resyear) <= int(slutyear)-int(startyear))
-        # print("testmonth", 0 <= int(slutmonth)-int(resmonth) <= int(slutmonth)-int(startmonth))
-        # print("testday", 0 <= int(slutday) - int(resday) <= int(slutday) - int(startday))
-        # print("testhour", 0 <= int(sluthour) - int(reshour) <= int(sluthour) - int(starthour))
-        # print("testmin", 0 <= int(slutmin) - int(resmin) <= int(slutmin) - int(startmin))
-        if 0 < int(slutyear) - int(resyear) <= int(slutyear) - int(startyear):
+        newrestime = restime.replace(":", "")
+        #print("før", newrestime)
+        newrestime = newrestime.strip()
+        newrestime = newrestime[:-2]
+        #print("efter", newrestime)
+        #print(newrestime)
+        newresdate = newresdate[1:]
+        searchres = newresdate+newrestime
+        #print(start, searchres, slut)
+        #print(len(start), len(searchres), len(slut))
+        if int(start) < int(searchres) < int(slut):
             intervallist.append(res)
-        elif 0 == int(slutyear) - int(resyear):
-            if 0 < int(slutmonth) - int(resmonth) <= int(slutmonth) - int(startmonth):
-                intervallist.append(res)
-            elif 0 == int(slutday) - int(resday):
-                if 0 < int(slutday) - int(resday) <= int(slutday) - int(startday):
-                    intervallist.append(res)
-                elif 0 == int(slutday) - int(resday):
-                    if 0 <= int(sluthour) - int(reshour) <= int(sluthour) - int(starthour):
-                        intervallist.append(res)
-                    elif 0 == int(sluthour) - int(reshour):
-                        if 0 <= int(slutmin) - int(resmin) <= int(slutmin) - int(startmin):
-                            intervallist.append(res)
+
     return intervallist
 
 
@@ -132,13 +127,13 @@ while True:
 
     elif valg == 5:
         print("Enter a start date in YYYY-MM-DD format")
-        startdate = str(input())
+        startdate = "2019-01-01"
         print("Enter a start time in HH:MM format")
-        starttime = str(input())
+        starttime = "12:33"
         print("Enter a end date in YYYY-MM-DD format")
-        slutdate = str(input())
+        slutdate = "2024-12-22"
         print("Enter a end time in HH:MM format")
-        sluttime = str(input())
+        sluttime = "12:34"
         print(search(startdate, starttime, slutdate, sluttime))
 
 
