@@ -7,6 +7,8 @@ res = la.reservation
 sql = database.database()
 
 print(datetime.datetime.now())
+
+
 def navndef():
     global res, isstring
     navnset = False
@@ -17,6 +19,8 @@ def navndef():
         print(res2.is_string_with_space())
         navnset = res2.is_string_with_space()
     return navn
+
+
 def datedef():
     global sql, navn
     try:
@@ -29,32 +33,34 @@ def datedef():
     while datoset == False:
         print("Enter a date in YYYY-MM-DD format")
         datoin = input()
-        #try:
-        year, month, day, = res2.dato(datoin)
-        stryear = str(year)
-        strmonth = str(month)
-        strday = str(day)
-        datoset = res2.datetest(month, day, strmonth, strday, stryear)
-        print(res2.datetest(month, day, strmonth, strday, stryear))
-        #except:
-            #pass
+        try:
+            year, month, day, = res2.dato(datoin)
+            stryear = str(year)
+            strmonth = str(month)
+            strday = str(day)
+            datoset = res2.datetest(month, day, strmonth, strday, stryear)
+            print(res2.datetest(month, day, strmonth, strday, stryear))
+
+        except:
+            pass
 
     timeset = False
     while timeset == False:
         print("Enter a time in HH:MM format")
         time = input()
-        #try:
-        hour, minute = res2.time(time)
-        strmin = str(minute)
-        strhour = str(hour)
-        timeset = res2.timetest(hour, minute, strhour, strmin)
-        print(timeset)
-        #except:
-            #pass
+        try:
+            hour, minute = res2.time(time)
+            strmin = str(minute)
+            strhour = str(hour)
+            timeset = res2.timetest(hour, minute, strhour, strmin)
+            print(timeset)
+        except:
+            pass
     finaldate = str(res2.final(year, month, day, hour, minute))
     return finaldate
 
-def search(startdate,starttime, slutdate,sluttime):
+
+def search(startdate, starttime, slutdate, sluttime):
     startyear, startmonth, startday = startdate.split("-")
     starthour, startmin = starttime.split(":")
     slutyear, slutmonth, slutday = slutdate.split("-")
@@ -67,21 +73,21 @@ def search(startdate,starttime, slutdate,sluttime):
         res = str(reslist[i])
         resname, resfulldate = res.split(",")
         blank, resdate, restime = resfulldate.split(" ")
-        resdate = resdate.replace("'"," ")
+        resdate = resdate.replace("'", " ")
         restime = restime.replace(")", " ")
         restime = restime.replace("'", " ")
-        #print("før", res)
+        # print("før", res)
         resyear, resmonth, resday = resdate.split("-")
         reshour, resmin, ressec = restime.split(":")
-        #print("testyear", 0 <= int(slutyear)-int(resyear) <= int(slutyear)-int(startyear))
-        #print("testmonth", 0 <= int(slutmonth)-int(resmonth) <= int(slutmonth)-int(startmonth))
-        #print("testday", 0 <= int(slutday) - int(resday) <= int(slutday) - int(startday))
-        #print("testhour", 0 <= int(sluthour) - int(reshour) <= int(sluthour) - int(starthour))
-        #print("testmin", 0 <= int(slutmin) - int(resmin) <= int(slutmin) - int(startmin))
-        if 0 < int(slutyear)-int(resyear) <= int(slutyear)-int(startyear):
+        # print("testyear", 0 <= int(slutyear)-int(resyear) <= int(slutyear)-int(startyear))
+        # print("testmonth", 0 <= int(slutmonth)-int(resmonth) <= int(slutmonth)-int(startmonth))
+        # print("testday", 0 <= int(slutday) - int(resday) <= int(slutday) - int(startday))
+        # print("testhour", 0 <= int(sluthour) - int(reshour) <= int(sluthour) - int(starthour))
+        # print("testmin", 0 <= int(slutmin) - int(resmin) <= int(slutmin) - int(startmin))
+        if 0 < int(slutyear) - int(resyear) <= int(slutyear) - int(startyear):
             intervallist.append(res)
-        elif 0 == int(slutyear)-int(resyear):
-            if 0 < int(slutmonth)-int(resmonth) <= int(slutmonth)-int(startmonth):
+        elif 0 == int(slutyear) - int(resyear):
+            if 0 < int(slutmonth) - int(resmonth) <= int(slutmonth) - int(startmonth):
                 intervallist.append(res)
             elif 0 == int(slutday) - int(resday):
                 if 0 < int(slutday) - int(resday) <= int(slutday) - int(startday):
@@ -138,6 +144,3 @@ while True:
 
     elif valg == 6:
         datedef()
-
-
-
