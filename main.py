@@ -127,15 +127,11 @@ while True:
 
     elif valg == 5:
         print("Enter a start date in YYYY-MM-DD format")
-        startdate = "2019-01-01"
+        startdate = str(input())
         print("Enter a start time in HH:MM format")
-        starttime = "12:33"
+        starttime = str(input())
         print("Enter a end date in YYYY-MM-DD format")
-        slutdate = "2024-12-22"
+        slutdate = str(input())
         print("Enter a end time in HH:MM format")
-        sluttime = "12:34"
+        sluttime = str(input())
         print(search(startdate, starttime, slutdate, sluttime))
-
-
-    elif valg == 6:
-        datedef()
