@@ -4,7 +4,6 @@ import datetime
 import unittest
 
 
-
 class LogicTests(unittest.TestCase):
     def setUp(self):
         self.res = lo.reservation("General Zimmer")
@@ -30,7 +29,6 @@ class LogicTests(unittest.TestCase):
         self.assertFalse(lo.is_string_with_space("weeeeee"))
         self.assertTrue(lo.is_string_with_space("weeeeee with space"))
 
-
     def tearDown(self):
         pass
 
@@ -39,8 +37,8 @@ class DatabaseTests(unittest.TestCase):
     def setUp(self):
         self.sql = database.database()
 
-    #Da vi ikke ved hvordan vi kan teste hver database handling uden brugen af en add og delete, så valgte vi at lave
-    #det hele i en test modul
+    # Da vi ikke ved hvordan vi kan teste hver database handling uden brugen af en add og delete, så valgte vi at lave
+    # det hele i en test modul
     def test_all(self):
         self.sql.add("testing da test test", "yeet")
         self.sql.modify("testing da test test", "meat")
